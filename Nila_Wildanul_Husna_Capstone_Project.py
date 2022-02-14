@@ -159,6 +159,8 @@ def update(mobil):
                         lihat_mobil(mobil)
                         continue
                     else:
+                        print('Data tidak disimpan')
+                        lihat_mobil(mobil)
                         break
         cek = str(input('Apakah Anda ingin mengupdate data lagi? (Y/N) '))
         if cek == 'Y':
@@ -169,11 +171,16 @@ def update(mobil):
 
 def hapus(mobil):
     lihat_mobil(mobil)
-    index_mobil = int(input('Masukkan index data mobil rental yang ingin dihapus: '))
-    del mobil[index_mobil]
-    lihat_mobil(mobil)
-    print('Data berhasil dihapus')
-    return 
+    while True:
+        index_mobil = int(input('Masukkan index data mobil rental yang ingin dihapus: '))
+        cek = str(input('Apakah Anda yakin ingin menghapus data? (Y/N) ')).capitalize()
+        if (cek == 'Y'):
+            del mobil[index_mobil]
+            lihat_mobil(mobil)
+            print('Data berhasil dihapus')
+        else:
+            continue
+        return 
 
 def sewa(mobil):
     lihat_mobil(mobil) 
