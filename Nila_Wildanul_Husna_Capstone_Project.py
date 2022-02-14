@@ -47,7 +47,6 @@ mobil_manual = [
 
 list_penyewa = [] 
 cart_sewa = [] 
-list_sewa = []
 
 def halo():
     print(f'''
@@ -59,6 +58,7 @@ def halo():
         4. Sewa dan Pengembalian Mobil
         5. Keluar Program
     ''')
+
 def pilih_opsi():
     pilih = int(input('Masukkan Pilihan Anda: '))
     return pilih
@@ -70,6 +70,7 @@ def menu1():
         2. Report Mobil Rental
         3. Back
     ''')
+
 def pilih_mobil():
     print(f'''
        Pilih Jenis Mobil:
@@ -77,6 +78,7 @@ def pilih_mobil():
         2. Mobil Manual
         3. Back
     ''')
+
 def menu2():
     print(f'''      
     ==============Menu #2: Menambah & Update Mobil Rental====================
@@ -85,6 +87,7 @@ def menu2():
         2. Update Mobil Rental
         3. Back to Main Menu
     ''')
+
 def menu4():
     print(f'''
        =======================Menu #4: Sewa dan Pengembalian Mobil======================
@@ -151,7 +154,7 @@ def update(mobil):
                     jenis = str.title(input('Masukkan jenis mobil: '))
                     tahun = int(input('Masukkan tahun mobil: '))
                     sewa_harian = int(input('Masukkan tarif sewa harian: '))
-                    cek = str(input('Apakah Anda yakin ingin update data ini? (Y/N) '))
+                    cek = str(input('Apakah Anda yakin ingin update data ini? (Y/N) ')).capitalize()
                     if cek == 'Y':
                         mobil[i]['jenis'] = jenis
                         mobil[i]['tahun'] = tahun
@@ -247,17 +250,17 @@ def pengembalian(list_penyewa):
         index_mobil = int(input('Silahkan masukkan index data mobil rental yang ingin dikembalikan: '))
         if index_mobil not in range(len(list_penyewa)):
             print('Index tidak ditemukan, silahkan input index kembali')
-            break
+            continue
         else:
-            global mobil
             if list_penyewa[index_mobil][1] == 'Matic':
                 mobil = mobil_matic
             elif list_penyewa[index_mobil][1] == 'Manual': 
                 mobil = mobil_manual
+            plat_penyewa = list_penyewa[index_mobil][2]
             for i in range(len(mobil)):
-                if list_penyewa[index_mobil][2] == mobil[i]['plat']:
+                if mobil[i]['plat'] == plat_penyewa:
                     status = 'Avaiable'
-                    cek = str(input('Apakah Anda yakin ingin menyimpan data ini? (Y/N) '))
+                    cek = str(input('Apakah Anda yakin ingin menyimpan data ini? (Y/N) ')).capitalize()
                     if cek == 'Y':
                         mobil[i]['status'] = status
                         del list_penyewa[index_mobil]
@@ -267,6 +270,9 @@ def pengembalian(list_penyewa):
                         break
         cek = str(input('Apakah Anda ingin mengembalikan mobil rental lagi? (Y/N) '))
         if cek == 'Y':
+            if list_penyewa == []:
+                print('Semua mobil rental sudah dikembalikan')
+                break
             continue
         else:
             break
