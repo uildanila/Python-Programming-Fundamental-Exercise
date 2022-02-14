@@ -113,14 +113,14 @@ def tambah(mobil):
     lihat_mobil(mobil)
     while True:
         plat = str(input('Masukkan plat mobil: '))
-        jenis = str.title(input('Masukkan jenis mobil: '))
-        tahun = int(input('Masukkan tahun mobil: '))
-        sewa_harian = int(input('Masukkan tarif sewa harian: '))
         for i in range(len(mobil)):
-            if plat == (mobil[i]['plat']) and jenis == (mobil[i]['jenis']):
-                print('Mobil dengan plat dan jenis yang sama sudah ada')
+            if plat == (mobil[i]['plat']):
+                print('Data mobil dengan plat yang sama sudah ada')
                 break
         else:
+            jenis = str.title(input('Masukkan jenis mobil: '))
+            tahun = int(input('Masukkan tahun mobil: '))
+            sewa_harian = int(input('Masukkan tarif sewa harian: '))
             cek = str(input('Apakah Anda yakin ingin menambah data ini? (Y/N) '))
             if cek == 'Y':
                 mobil.append({
@@ -143,18 +143,16 @@ def update(mobil):
     while True:
         index_mobil = int(input('Silahkan masukkan index data mobil rental yang ingin diupdate: '))
         if index_mobil not in range(len(mobil)):
-            print('Index tidak ditemukan, silahkan input index kembali')
+            print('Data dengan index yang Anda cari tidak ada')
             continue
         else:
             for i in range(len(mobil)):
                 if mobil[index_mobil] == mobil[i]:
-                    plat = str(input('Masukkan plat mobil: '))
                     jenis = str.title(input('Masukkan jenis mobil: '))
                     tahun = int(input('Masukkan tahun mobil: '))
                     sewa_harian = int(input('Masukkan tarif sewa harian: '))
                     cek = str(input('Apakah Anda yakin ingin update data ini? (Y/N) '))
                     if cek == 'Y':
-                        mobil[i]['plat'] = plat
                         mobil[i]['jenis'] = jenis
                         mobil[i]['tahun'] = tahun
                         mobil[i]['sewa_harian'] = sewa_harian
@@ -404,5 +402,5 @@ while True:
     elif(pilihan_menu == 5):
         break
     else:
-        print('Pilihan Tidak Tersedia')
+        print('Pilihan yang Anda masukkan salah')
         continue
