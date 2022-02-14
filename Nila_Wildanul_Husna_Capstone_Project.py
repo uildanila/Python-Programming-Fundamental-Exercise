@@ -247,18 +247,20 @@ def pengembalian(list_penyewa):
         index_mobil = int(input('Silahkan masukkan index data mobil rental yang ingin dikembalikan: '))
         if index_mobil not in range(len(list_penyewa)):
             print('Index tidak ditemukan, silahkan input index kembali')
-            continue
+            break
         else:
-            if list_penyewa[index_mobil] == 'Matic':
+            global mobil
+            if list_penyewa[index_mobil][1] == 'Matic':
                 mobil = mobil_matic
-            else: 
+            elif list_penyewa[index_mobil][1] == 'Manual': 
                 mobil = mobil_manual
             for i in range(len(mobil)):
-                if mobil[index_mobil] == mobil[i]:
+                if list_penyewa[index_mobil][2] == mobil[i]['plat']:
                     status = 'Avaiable'
                     cek = str(input('Apakah Anda yakin ingin menyimpan data ini? (Y/N) '))
                     if cek == 'Y':
                         mobil[i]['status'] = status
+                        del list_penyewa[index_mobil]
                         lihat_mobil(mobil)
                         continue
                     else:
